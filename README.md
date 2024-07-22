@@ -6,5 +6,4 @@ Written for a daily challenge. Still some bugs to work out.
 
 Work-in-progress!
 
-![](http://www.adamlastowka.com/dump/fluid_demo_1.mp4)
-
+https://github.com/user-attachments/assets/774a031a-16a5-4dda-8b2d-030d4491e6a2
