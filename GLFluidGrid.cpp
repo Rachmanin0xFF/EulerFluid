@@ -16,9 +16,11 @@ void GLFluidGrid::init() {
     glutil::load_shader("generic.vert", "integrate.frag", integrate);
  }
 
-void GLFluidGrid::update_mouse(const int& mx, const int& my) {
+void GLFluidGrid::update_mouse(const int& mx, const int& my, const int& dmx, const int& dmy) {
     mouseX = mx;
     mouseY = my;
+    dmouseX = dmx;
+    dmouseY = dmy;
 }
 
 void GLFluidGrid::set_uniforms(glutil::shaderTuple& t) {
@@ -33,6 +35,9 @@ void GLFluidGrid::set_uniforms(glutil::shaderTuple& t) {
     // external input / non-const. stuff
     unsigned int mouseLocation = glGetUniformLocation(t.program, "mouse");
     glUniform2f(mouseLocation, mouseX, grid_res - mouseY);
+
+    unsigned int dmouseLocation = glGetUniformLocation(t.program, "dmouse");
+    glUniform2f(dmouseLocation, dmouseX, -dmouseY);
     // TODO: time setter
     unsigned int timeLocation = glGetUniformLocation(t.program, "time");
     glUniform1f(timeLocation, time);

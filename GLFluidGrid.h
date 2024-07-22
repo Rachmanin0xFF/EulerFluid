@@ -10,7 +10,7 @@ public:
     void update();
     void init();
     GLuint get_texture_id();
-    void update_mouse(const int& mx, const int& my); // should be in virtual
+    void update_mouse(const int& mx, const int& my, const int& dmx, const int& dmy); // should be in virtual
 private:
     void set_uniforms(glutil::shaderTuple& t);
     glutil::shaderTuple advection;
@@ -21,6 +21,8 @@ private:
     glutil::colorFBOTuple buffer_B;
     float mouseX;
     float mouseY;
+    float dmouseX;
+    float dmouseY;
     float time{ 0 };
 };
 

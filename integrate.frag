@@ -7,6 +7,7 @@ in vec2 texture_coord;
 uniform sampler2D TEX;
 
 uniform vec2 mouse;
+uniform vec2 dmouse;
 uniform vec2 RES;
 uniform float dt;
 uniform float rho;
@@ -38,8 +39,8 @@ void main() {
     // Mouse input!!!
     float R = length(gl_FragCoord.xy - mouse.xy);
     if(R < 40) {
-        frag_color.x += (40.0-R)*cos(time)/40.0;
-        frag_color.y += (40.0-R)*sin(time)/40.0;
+        frag_color.x += 500.0*dt*(40.0-R)*dmouse.x/40.0;
+        frag_color.y += 500.0*dt*(40.0-R)*dmouse.y/40.0;
     }
 
     frag_color.wz = current_cell.wz;
