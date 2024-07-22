@@ -2,7 +2,7 @@
 #include <vector>
 
 GLuint GLFluidGrid::get_texture_id() {
-    return buffer_A.color_tex;
+    return buffer_out.color_tex;
 }
 
 void GLFluidGrid::init() {
@@ -10,10 +10,16 @@ void GLFluidGrid::init() {
     glutil::gen_colorFBOTuple(grid_res, grid_res, buffer_A);
     glutil::gen_colorFBOTuple(grid_res, grid_res, buffer_B);
 
+    // buffers for color information and output texture
+    glutil::gen_colorFBOTuple(grid_res, grid_res, buffer_C);
+    glutil::gen_colorFBOTuple(grid_res, grid_res, buffer_out);
+
     glutil::load_shader("generic.vert", "advection.frag", advection);
     glutil::load_shader("generic.vert", "divergence.frag", divergence);
     glutil::load_shader("generic.vert", "jacobi.frag", jacobi);
     glutil::load_shader("generic.vert", "integrate.frag", integrate);
+    glutil::load_shader("generic.vert", "color_transport.frag", color_transport);
+    glutil::load_shader("generic.vert", "generic.frag", generic);
  }
 
 void GLFluidGrid::update_mouse(const int& mx, const int& my, const int& dmx, const int& dmy) {
@@ -25,22 +31,18 @@ void GLFluidGrid::update_mouse(const int& mx, const int& my, const int& dmx, con
 
 void GLFluidGrid::set_uniforms(glutil::shaderTuple& t) {
     glUseProgram(t.program);
-    unsigned int resLocation = glGetUniformLocation(t.program, "RES");
-    glUniform2f(resLocation, grid_res, grid_res);
-    unsigned int dtLocation = glGetUniformLocation(t.program, "dt");
-    glUniform1f(dtLocation, 0.001);
-    unsigned int rhoLocation = glGetUniformLocation(t.program, "rho");
-    glUniform1f(rhoLocation, 100.01);
+    glUniform2f(glGetUniformLocation(t.program, "RES"), grid_res, grid_res);
+    
+    glUniform1f(glGetUniformLocation(t.program, "dt"), 0.001);
+    glUniform1f(glGetUniformLocation(t.program, "rho"), 100.01);
 
     // external input / non-const. stuff
-    unsigned int mouseLocation = glGetUniformLocation(t.program, "mouse");
-    glUniform2f(mouseLocation, mouseX, grid_res - mouseY);
+    glUniform2f(glGetUniformLocation(t.program, "mouse"), mouseX, grid_res - mouseY);
 
-    unsigned int dmouseLocation = glGetUniformLocation(t.program, "dmouse");
-    glUniform2f(dmouseLocation, dmouseX, -dmouseY);
+    glUniform2f(glGetUniformLocation(t.program, "dmouse"), dmouseX, -dmouseY);
     // TODO: time setter
-    unsigned int timeLocation = glGetUniformLocation(t.program, "time");
-    glUniform1f(timeLocation, time);
+    glUniform1f(glGetUniformLocation(t.program, "time"), time);
+
     time += 0.002;
 }
 
@@ -49,6 +51,7 @@ void GLFluidGrid::update() {
     set_uniforms(jacobi);
     set_uniforms(divergence);
     set_uniforms(integrate);
+    set_uniforms(color_transport);
 
     // transport velocities without conservation
     FBO_to_FBO(buffer_A, buffer_B, advection);
@@ -64,4 +67,12 @@ void GLFluidGrid::update() {
 
     // update velocities
     FBO_to_FBO(buffer_B, buffer_A, integrate);
+
+
+    
+    glEnable(GL_TEXTURE1);
+    glActiveTexture(GL_TEXTURE1);
+    glBindTexture(GL_TEXTURE_2D, buffer_C.color_tex);
+    FBO_to_FBO(buffer_A, buffer_out, color_transport);
+    FBO_to_FBO(buffer_out, buffer_C, generic);
 }

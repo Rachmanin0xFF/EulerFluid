@@ -4,7 +4,7 @@
 out vec4 frag_color;
 in vec2 texture_coord;
 
-uniform sampler2D TEX;
+uniform sampler2D TEX0;
 
 uniform vec2 RES;
 uniform float dt;
@@ -15,16 +15,16 @@ void main() {
     vec2 uv = gl_FragCoord.xy;
     vec2 step_size = 1.0/RES.xy;
 
-    vec4 current_cell = texture2D(TEX, texture_coord);
+    vec4 current_cell = texture2D(TEX0, texture_coord);
     frag_color.xy = current_cell.xy;
     vec2 advected_vel = current_cell.xy;
 
     // simple divergence sampling
     float divergence = -2.0 * step_size.x * rho / dt * (
-          texture2D(TEX, texture_coord + vec2(step_size.x, 0.0)).x
-        - texture2D(TEX, texture_coord + vec2(-step_size.x, 0.0)).x
-        + texture2D(TEX, texture_coord + vec2(0.0, step_size.y)).y
-        - texture2D(TEX, texture_coord + vec2(0.0, -step_size.y)).y
+          texture2D(TEX0, texture_coord + vec2(step_size.x, 0.0)).x
+        - texture2D(TEX0, texture_coord + vec2(-step_size.x, 0.0)).x
+        + texture2D(TEX0, texture_coord + vec2(0.0, step_size.y)).y
+        - texture2D(TEX0, texture_coord + vec2(0.0, -step_size.y)).y
     );
 
     frag_color.z = divergence;

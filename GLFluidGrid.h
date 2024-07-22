@@ -17,8 +17,12 @@ private:
     glutil::shaderTuple divergence;
     glutil::shaderTuple jacobi;
     glutil::shaderTuple integrate;
+    glutil::shaderTuple color_transport;
+    glutil::shaderTuple generic;
     glutil::colorFBOTuple buffer_A;
     glutil::colorFBOTuple buffer_B;
+    glutil::colorFBOTuple buffer_C;
+    glutil::colorFBOTuple buffer_out;
     float mouseX;
     float mouseY;
     float dmouseX;

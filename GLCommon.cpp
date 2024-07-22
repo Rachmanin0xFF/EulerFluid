@@ -8,7 +8,6 @@ glutil::colorFBOTuple glutil::get_screen_buffer() {
 
 // "filters" one FBO to another using some shader
 void glutil::FBO_to_FBO(const colorFBOTuple& in, const colorFBOTuple& out, const shaderTuple& transform) {
-    
     glEnable(GL_TEXTURE_2D);
     glBindFramebuffer(GL_FRAMEBUFFER, out.FBO);
     glUseProgram(transform.program);
