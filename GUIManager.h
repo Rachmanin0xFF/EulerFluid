@@ -21,11 +21,20 @@ public:
 	};
 	GUIManagerState update();
 	void init();
-	void set_texture_id(const GLuint &new_id) { display_tex = new_id; }
+
+	// TODO: make more memory-safe
+	//		 need to think about other use cases...
+	void set_texture_id(const GLuint &new_id) {
+		display_tex = new_id;
+	}
+
 	GLuint get_texture_id() { return display_tex; }
 	~GUIManager() {
 		glDeleteTextures(1, &display_tex);
 	};
+	sf::Vector2i get_mouse_position() {
+		return sf::Mouse::getPosition(window);
+	}
 private:
 	sf::Window window;
 	GLuint display_tex;

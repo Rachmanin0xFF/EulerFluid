@@ -35,27 +35,18 @@ GUIManagerState GUIManager::update() {
             glViewport(0, 0, event.size.width, event.size.height);
         }
     }
-    glClearColor(1.f, 0.f, 1.f, 0.f);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    glClearColor(0.f, 1.f, 1.f, 0.f);
+
+    glViewport(0, 0, window.getSize().x, window.getSize().y);
 
     glEnable(GL_TEXTURE_2D);
+    glEnable(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, display_tex);
 
-    glMatrixMode(GL_PROJECTION);
-    glPushMatrix();
-    glLoadIdentity();
-    glOrtho(0, display_tex_res, 0, display_tex_res, -1, 1);
     glUseProgram(generic_shader.program);
 
-    glBegin(GL_QUADS);
-    glTexCoord2f(0, 0); glVertex2f(-1, -1);
-    glTexCoord2f(0, 1); glVertex2f(-1, 1);
-    glTexCoord2f(1, 1); glVertex2f(1, 1);
-    glTexCoord2f(1, 0); glVertex2f(1, -1);
-    glEnd();
-
-    glPopMatrix();
-    glDisable(GL_TEXTURE_2D);
+    glutil::immediate_mode_rect();
 
     window.display();
     

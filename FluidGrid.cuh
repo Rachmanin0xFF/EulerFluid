@@ -6,8 +6,8 @@ class FluidGrid {
 public:
 	virtual void init() = 0;
 	virtual void update() = 0;
+	virtual GLuint get_texture_id() = 0;
 	virtual ~FluidGrid() = default;
-	FluidGrid(const GLuint& tex_output_ref) : gl_display_texture(tex_output_ref) {};
 protected:
-	GLuint gl_display_texture;
+	int grid_res = 512;
 };

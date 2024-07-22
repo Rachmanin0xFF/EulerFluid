@@ -89,6 +89,9 @@
     <ClCompile Include="GLCommon.cpp" />
     <ClCompile Include="GLFluidGrid.cpp" />
     <ClCompile Include="GUIManager.cpp" />
+    <Text Include="advection.frag">
+      <FileType>Document</FileType>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FluidGrid.cuh" />
@@ -97,8 +100,13 @@
     <ClInclude Include="GUIManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="divergence.frag" />
     <None Include="generic.frag" />
-    <None Include="generic.vert" />
+    <None Include="integrate.frag" />
+    <None Include="jacobi.frag" />
+    <Text Include="generic.vert">
+      <FileType>Document</FileType>
+    </Text>
     <None Include="README.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

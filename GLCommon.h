@@ -8,18 +8,31 @@
 #include <iostream>
 
 namespace glutil {
+
+    // not really a 'tuple', lol
     struct shaderTuple {
         GLuint vs;
         GLuint fs;
         GLuint program;
-        ~shaderTuple() {
-            glDeleteProgram(program);
-            glDeleteShader(vs);
-            glDeleteShader(fs);
-        }
+        ~shaderTuple();
     };
+
+    struct colorFBOTuple {
+        GLuint color_tex;
+        GLuint FBO;
+        int w;
+        int h;
+        ~colorFBOTuple();
+    };
+
+    void immediate_mode_rect();
+
+    colorFBOTuple get_screen_buffer();
+    void FBO_to_FBO(const colorFBOTuple &in, const colorFBOTuple &out, const shaderTuple &transform);
 
     std::string load_str(const char* path);
 
-    void load_shader(const char* vert_path, const char* frag_path, shaderTuple& data);
+    void load_shader(const char* vert_path, const char* frag_path, shaderTuple& ids);
+
+    void gen_colorFBOTuple(const int& width, const int& height, colorFBOTuple& ids);
 }
