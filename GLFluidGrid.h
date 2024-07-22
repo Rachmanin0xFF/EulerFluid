@@ -21,6 +21,6 @@ private:
     glutil::colorFBOTuple buffer_B;
     float mouseX;
     float mouseY;
-    float time;
+    float time{ 0 };
 };
 

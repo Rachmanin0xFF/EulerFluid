@@ -10,5 +10,5 @@ uniform sampler2D TEX;
 void main() {
     vec2 uv = gl_FragCoord.xy;
     frag_color = texture2D(TEX, texture_coord.xy);
-    //frag_color = sin(frag_color*100.0);
+    frag_color = sin(frag_color*10.0);
 }

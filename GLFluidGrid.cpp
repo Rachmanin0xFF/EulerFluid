@@ -27,7 +27,7 @@ void GLFluidGrid::set_uniforms(glutil::shaderTuple& t) {
     unsigned int dtLocation = glGetUniformLocation(t.program, "dt");
     glUniform1f(dtLocation, 0.001);
     unsigned int rhoLocation = glGetUniformLocation(t.program, "rho");
-    glUniform1f(rhoLocation, 100.0);
+    glUniform1f(rhoLocation, 10.0);
     unsigned int mouseLocation = glGetUniformLocation(t.program, "mouse");
     glUniform2f(mouseLocation, mouseX, grid_res - mouseY);
     unsigned int timeLocation = glGetUniformLocation(t.program, "time");

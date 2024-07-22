@@ -25,8 +25,8 @@ void main() {
     float dpdx = texture2D(TEX, texture_coord + vec2(-step_size.x, 0.0)).w 
                 -texture2D(TEX, texture_coord + vec2(step_size.x, 0.0)).w;
     
-    float dpdy = texture2D(TEX, texture_coord + vec2(-step_size.y, 0.0)).w 
-                -texture2D(TEX, texture_coord + vec2(step_size.y, 0.0)).w;
+    float dpdy = texture2D(TEX, texture_coord + vec2(0.0, -step_size.y)).w 
+                -texture2D(TEX, texture_coord + vec2(0.0, step_size.y)).w;
 
     float euler_update_vel_x = advected_vel.x + dt/(2*rho*step_size.x)*dpdx;
     float euler_update_vel_y = advected_vel.y + dt/(2*rho*step_size.y)*dpdy;
@@ -34,9 +34,9 @@ void main() {
     frag_color = vec4(euler_update_vel_x, euler_update_vel_y, 0.0, 1.0);
 
     float R = length(gl_FragCoord.xy - mouse.xy);
-    if(R < 10) {
-        frag_color.x = cos(time);
-        frag_color.y = sin(time);
+    if(R < 20) {
+        frag_color.x += 1.0*cos(time);
+        frag_color.y += 1.0*sin(time);
     }
 
     frag_color.wz = current_cell.wz;
