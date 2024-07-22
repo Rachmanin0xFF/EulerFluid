@@ -11,7 +11,7 @@ uniform vec2 RES;
 uniform float dt;
 uniform float rho;
 uniform float time;
-// Encode
+
 
 void main() {
     vec2 uv = gl_FragCoord.xy;
@@ -38,8 +38,8 @@ void main() {
     // Mouse input!!!
     float R = length(gl_FragCoord.xy - mouse.xy);
     if(R < 40) {
-        frag_color.x += 1.0*cos(time);
-        frag_color.y += 1.0*sin(time);
+        frag_color.x += (40.0-R)*cos(time)/40.0;
+        frag_color.y += (40.0-R)*sin(time)/40.0;
     }
 
     frag_color.wz = current_cell.wz;

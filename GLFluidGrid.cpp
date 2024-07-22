@@ -36,7 +36,7 @@ void GLFluidGrid::set_uniforms(glutil::shaderTuple& t) {
     // TODO: time setter
     unsigned int timeLocation = glGetUniformLocation(t.program, "time");
     glUniform1f(timeLocation, time);
-    time += 0.01;
+    time += 0.002;
 }
 
 void GLFluidGrid::update() {

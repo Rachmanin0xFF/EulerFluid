@@ -10,7 +10,6 @@ uniform vec2 RES;
 uniform float dt;
 uniform float rho;
 
-// Encode
 
 void main() {
     vec2 uv = gl_FragCoord.xy;

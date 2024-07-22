@@ -9,7 +9,6 @@ uniform sampler2D TEX;
 uniform vec2 RES;
 uniform float dt;
 
-// Encode
 
 void main() {
     vec2 uv = gl_FragCoord.xy;
