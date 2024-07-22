@@ -6,7 +6,7 @@ class GLFluidGrid :
     public FluidGrid
 {
 public:
-    GLFluidGrid() { init(); }
+    GLFluidGrid(const int& res) { grid_res = res; init(); }
     void update();
     void init();
     GLuint get_texture_id();

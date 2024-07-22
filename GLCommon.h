@@ -7,6 +7,7 @@
 #include <fstream>
 #include <iostream>
 
+// general opengl utilitiy functions (making textures, fbos, loading shaders, etc.)
 namespace glutil {
 
     // not really a 'tuple', lol

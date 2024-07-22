@@ -6,6 +6,7 @@ GLuint GLFluidGrid::get_texture_id() {
 }
 
 void GLFluidGrid::init() {
+    // generate the two buffers we'll ping-pong between
     glutil::gen_colorFBOTuple(grid_res, grid_res, buffer_A);
     glutil::gen_colorFBOTuple(grid_res, grid_res, buffer_B);
 
@@ -27,9 +28,12 @@ void GLFluidGrid::set_uniforms(glutil::shaderTuple& t) {
     unsigned int dtLocation = glGetUniformLocation(t.program, "dt");
     glUniform1f(dtLocation, 0.001);
     unsigned int rhoLocation = glGetUniformLocation(t.program, "rho");
-    glUniform1f(rhoLocation, 10.0);
+    glUniform1f(rhoLocation, 100.01);
+
+    // external input / non-const. stuff
     unsigned int mouseLocation = glGetUniformLocation(t.program, "mouse");
     glUniform2f(mouseLocation, mouseX, grid_res - mouseY);
+    // TODO: time setter
     unsigned int timeLocation = glGetUniformLocation(t.program, "time");
     glUniform1f(timeLocation, time);
     time += 0.01;
@@ -41,15 +45,18 @@ void GLFluidGrid::update() {
     set_uniforms(divergence);
     set_uniforms(integrate);
 
+    // transport velocities without conservation
     FBO_to_FBO(buffer_A, buffer_B, advection);
+    // compute divergence of new velocity field
     FBO_to_FBO(buffer_B, buffer_A, divergence);
 
-    // diffusion
-    for (int i = 0; i < 5; i++) {
+    // find pressures (solve via jacobi method / diffusion)
+    for (int i = 0; i < 20; i++) {
         FBO_to_FBO(buffer_A, buffer_B, jacobi);
         FBO_to_FBO(buffer_B, buffer_A, jacobi);
     }
     FBO_to_FBO(buffer_A, buffer_B, jacobi);
 
+    // update velocities
     FBO_to_FBO(buffer_B, buffer_A, integrate);
 }

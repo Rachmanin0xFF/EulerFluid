@@ -29,5 +29,5 @@ void main() {
 
     frag_color.z = divergence;
 
-    frag_color.w = current_cell.w;
+    frag_color.w = 0.0;
 }

@@ -26,6 +26,7 @@ void GUIManager::init() {
 
 GUIManagerState GUIManager::update() {
     
+    // check for resize (though we don't exactly handle it well lol)
     sf::Event event;
     while (window.pollEvent(event)) {
         if (event.type == sf::Event::Closed) {

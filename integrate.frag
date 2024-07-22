@@ -34,7 +34,7 @@ void main() {
     frag_color = vec4(euler_update_vel_x, euler_update_vel_y, 0.0, 1.0);
 
     float R = length(gl_FragCoord.xy - mouse.xy);
-    if(R < 20) {
+    if(R < 40) {
         frag_color.x += 1.0*cos(time);
         frag_color.y += 1.0*sin(time);
     }

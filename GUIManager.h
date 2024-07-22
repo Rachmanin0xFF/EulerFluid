@@ -16,6 +16,7 @@ public:
 		: window(sf::VideoMode(width, height), "OpenGL", sf::Style::Default, sf::ContextSettings(0, 0, 0, 4, 1)) {
 		window.setVerticalSyncEnabled(true);
 		window.setActive(true);
+		display_tex_res = width;
 		init();
 		glutil::load_shader("generic.vert", "generic.frag", generic_shader);
 	};
@@ -38,7 +39,7 @@ public:
 private:
 	sf::Window window;
 	GLuint display_tex;
-	const int display_tex_res = 512;
+	int display_tex_res = 512;
 	glutil::shaderTuple generic_shader;
 };
 

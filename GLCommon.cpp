@@ -6,6 +6,7 @@ glutil::colorFBOTuple glutil::get_screen_buffer() {
     return t;
 }
 
+// "filters" one FBO to another using some shader
 void glutil::FBO_to_FBO(const colorFBOTuple& in, const colorFBOTuple& out, const shaderTuple& transform) {
     
     glEnable(GL_TEXTURE_2D);
@@ -20,6 +21,7 @@ void glutil::FBO_to_FBO(const colorFBOTuple& in, const colorFBOTuple& out, const
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
+// todo: vertex array object? low priority
 void glutil::immediate_mode_rect() {
     glDisable(GL_DEPTH_TEST);
     glBegin(GL_QUADS);
@@ -35,6 +37,8 @@ glutil::colorFBOTuple::~colorFBOTuple() {
     glDeleteTextures(1, &color_tex);
 }
 
+// FBO generation code!
+// makes a 16-bit floating-point RGBA texture with NO depth map
 void glutil::gen_colorFBOTuple(const int& width, const int& height, colorFBOTuple& ids) {
     ids.w = width;
     ids.h = height;
@@ -91,6 +95,7 @@ std::string glutil::load_str(const char* path) {
     return text;
 }
 
+// icky function....
 void glutil::load_shader(const char* vert_path, const char* frag_path, shaderTuple& data) {
     std::string vertex_shader = load_str(vert_path);
     std::string fragment_shader = load_str(frag_path);

@@ -1,4 +1,7 @@
-﻿#version 330
+﻿
+// generic shader for pasting textures to screen
+
+#version 330
 
 layout(location = 0)in vec4 v_in;
 
