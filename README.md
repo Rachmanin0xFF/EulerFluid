@@ -6,5 +6,4 @@ Written for a daily challenge. Still some bugs to work out.
 
 Work-in-progress!
 
-
-![screenshot](screenshot.png?raw=true "screenshot showing some glowey fluid stuff")
+<video src='[your URL here](https://www.adamlastowka.com/dump/fluid_demo_1.mp4)' width=280/>
