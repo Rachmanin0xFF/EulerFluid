@@ -20,6 +20,7 @@ void GLFluidGrid::init() {
     glutil::load_shader("generic.vert", "integrate.frag", integrate);
     glutil::load_shader("generic.vert", "color_transport.frag", color_transport);
     glutil::load_shader("generic.vert", "generic.frag", generic);
+    glutil::load_shader("generic.vert", "final_pass.frag", final_pass);
  }
 
 void GLFluidGrid::update_mouse(const int& mx, const int& my, const int& dmx, const int& dmy) {
@@ -52,6 +53,7 @@ void GLFluidGrid::update() {
     set_uniforms(divergence);
     set_uniforms(integrate);
     set_uniforms(color_transport);
+    set_uniforms(final_pass);
 
     // transport velocities without conservation
     FBO_to_FBO(buffer_A, buffer_B, advection);
@@ -73,6 +75,8 @@ void GLFluidGrid::update() {
     glEnable(GL_TEXTURE1);
     glActiveTexture(GL_TEXTURE1);
     glBindTexture(GL_TEXTURE_2D, buffer_C.color_tex);
-    FBO_to_FBO(buffer_A, buffer_out, color_transport);
-    FBO_to_FBO(buffer_out, buffer_C, generic);
+    FBO_to_FBO(buffer_A, buffer_B, color_transport);
+    FBO_to_FBO(buffer_B, buffer_C, generic);
+
+    FBO_to_FBO(buffer_A, buffer_out, final_pass);
 }

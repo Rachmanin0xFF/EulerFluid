@@ -102,6 +102,7 @@
   <ItemGroup>
     <None Include="color_transport.frag" />
     <None Include="divergence.frag" />
+    <None Include="final_pass.frag" />
     <None Include="generic.frag" />
     <None Include="integrate.frag" />
     <None Include="jacobi.frag" />

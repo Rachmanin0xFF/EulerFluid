@@ -19,6 +19,8 @@ private:
     glutil::shaderTuple integrate;
     glutil::shaderTuple color_transport;
     glutil::shaderTuple generic;
+    glutil::shaderTuple final_pass;
+
     glutil::colorFBOTuple buffer_A;
     glutil::colorFBOTuple buffer_B;
     glutil::colorFBOTuple buffer_C;

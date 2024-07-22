@@ -31,8 +31,10 @@ void main() {
                 -texture2D(TEX0, texture_coord + vec2(0.0, -step_size.y)).w;
 
     // accelerate using pressure information
-    float euler_update_vel_x = advected_vel.x - 1.0*dt/(2*rho*step_size.x)*dpdx;
-    float euler_update_vel_y = advected_vel.y - 1.0*dt/(2*rho*step_size.y)*dpdy;
+    float rigidity = 0.0;
+
+    float euler_update_vel_x = advected_vel.x - (1.0 + rigidity)*dt/(2*rho*step_size.x)*dpdx;
+    float euler_update_vel_y = advected_vel.y - (1.0 + rigidity)*dt/(2*rho*step_size.y)*dpdy;
 
     frag_color = vec4(euler_update_vel_x, euler_update_vel_y, 0.0, 1.0);
 
