@@ -22,17 +22,20 @@ void main() {
     vec2 advected_vel = current_cell.xy;
     float pressure = current_cell.w;
 
-    float dpdx = texture2D(TEX, texture_coord + vec2(-step_size.x, 0.0)).w 
-                -texture2D(TEX, texture_coord + vec2(step_size.x, 0.0)).w;
+    // calculate pressure differentials
+    float dpdx = texture2D(TEX, texture_coord + vec2(step_size.x, 0.0)).w 
+                -texture2D(TEX, texture_coord + vec2(-step_size.x, 0.0)).w;
     
-    float dpdy = texture2D(TEX, texture_coord + vec2(0.0, -step_size.y)).w 
-                -texture2D(TEX, texture_coord + vec2(0.0, step_size.y)).w;
+    float dpdy = texture2D(TEX, texture_coord + vec2(0.0, step_size.y)).w 
+                -texture2D(TEX, texture_coord + vec2(0.0, -step_size.y)).w;
 
-    float euler_update_vel_x = advected_vel.x + dt/(2*rho*step_size.x)*dpdx;
-    float euler_update_vel_y = advected_vel.y + dt/(2*rho*step_size.y)*dpdy;
+    // accelerate using pressure information
+    float euler_update_vel_x = advected_vel.x - dt/(2*rho*step_size.x)*dpdx;
+    float euler_update_vel_y = advected_vel.y - dt/(2*rho*step_size.y)*dpdy;
 
     frag_color = vec4(euler_update_vel_x, euler_update_vel_y, 0.0, 1.0);
 
+    // Mouse input!!!
     float R = length(gl_FragCoord.xy - mouse.xy);
     if(R < 40) {
         frag_color.x += 1.0*cos(time);

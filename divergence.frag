@@ -20,6 +20,7 @@ void main() {
     frag_color.xy = current_cell.xy;
     vec2 advected_vel = current_cell.xy;
 
+    // simple divergence sampling
     float divergence = -2.0 * step_size.x * rho / dt * (
           texture2D(TEX, texture_coord + vec2(step_size.x, 0.0)).x
         - texture2D(TEX, texture_coord + vec2(-step_size.x, 0.0)).x

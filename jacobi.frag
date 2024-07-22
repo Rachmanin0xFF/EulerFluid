@@ -15,6 +15,8 @@ void main() {
     vec2 uv = gl_FragCoord.xy;
     vec2 step_size = 2.0/RES.xy;
 
+    // solve for pressure (assuming navier-stokes incompressible) with Jacobi iterative method
+    // todo: fix this up
     vec4 current_cell = texture2D(TEX, texture_coord);
     frag_color.xyz = current_cell.xyz;
     frag_color.w = 0.25*(current_cell.z +

@@ -21,6 +21,7 @@ void main() {
     vec4 current_cell = texture2D(TEX, texture_coord);
     vec2 velocity = current_cell.xy;
 
+    // straightforward implicit method
     vec2 advected_vel = texture2D(TEX, texture_coord - velocity*dt).xy;
     frag_color = vec4(advected_vel, current_cell.z, current_cell.w);
 }
