@@ -51,7 +51,7 @@ void GLFluidGrid::update() {
     FBO_to_FBO(buffer_B, buffer_A, divergence);
 
     // find pressures (solve via jacobi method / diffusion)
-    for (int i = 0; i < 20; i++) {
+    for (int i = 0; i < 40; i++) {
         FBO_to_FBO(buffer_A, buffer_B, jacobi);
         FBO_to_FBO(buffer_B, buffer_A, jacobi);
     }
