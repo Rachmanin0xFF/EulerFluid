@@ -6,5 +6,5 @@ Written for a daily challenge. Still some bugs to work out.
 
 Work-in-progress!
 
-http://www.adamlastowka.com/dump/fluid_demo_1.mp4
+![](http://www.adamlastowka.com/dump/fluid_demo_1.mp4)
 
