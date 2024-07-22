@@ -6,4 +6,5 @@ Written for a daily challenge. Still some bugs to work out.
 
 Work-in-progress!
 
-<video src='[your URL here](https://www.adamlastowka.com/dump/fluid_demo_1.mp4)' width=280/>
+http://www.adamlastowka.com/dump/fluid_demo_1.mp4
+
