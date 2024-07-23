@@ -18,7 +18,7 @@ public:
 		window.setActive(true);
 		display_tex_res = width;
 		init();
-		glutil::load_shader("generic.vert", "generic.frag", generic_shader);
+		glutil::load_shader("shaders/generic.vert", "shaders/generic.frag", generic_shader);
 	};
 	GUIManagerState update();
 	void init();

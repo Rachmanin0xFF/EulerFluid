@@ -14,13 +14,14 @@ void GLFluidGrid::init() {
     glutil::gen_colorFBOTuple(grid_res, grid_res, buffer_C);
     glutil::gen_colorFBOTuple(grid_res, grid_res, buffer_out);
 
-    glutil::load_shader("generic.vert", "advection.frag", advection);
-    glutil::load_shader("generic.vert", "divergence.frag", divergence);
-    glutil::load_shader("generic.vert", "jacobi.frag", jacobi);
-    glutil::load_shader("generic.vert", "integrate.frag", integrate);
-    glutil::load_shader("generic.vert", "color_transport.frag", color_transport);
-    glutil::load_shader("generic.vert", "generic.frag", generic);
-    glutil::load_shader("generic.vert", "final_pass.frag", final_pass);
+    // TODO: make a shader manager :/
+    glutil::load_shader("shaders/generic.vert", "shaders/advection.frag", advection);
+    glutil::load_shader("shaders/generic.vert", "shaders/divergence.frag", divergence);
+    glutil::load_shader("shaders/generic.vert", "shaders/jacobi.frag", jacobi);
+    glutil::load_shader("shaders/generic.vert", "shaders/integrate.frag", integrate);
+    glutil::load_shader("shaders/generic.vert", "shaders/color_transport.frag", color_transport);
+    glutil::load_shader("shaders/generic.vert", "shaders/generic.frag", generic);
+    glutil::load_shader("shaders/generic.vert", "shaders/final_pass.frag", final_pass);
  }
 
 void GLFluidGrid::update_mouse(const int& mx, const int& my, const int& dmx, const int& dmy) {
