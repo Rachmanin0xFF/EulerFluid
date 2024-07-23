@@ -1,8 +1,8 @@
 # EulerFluid
 
-A GPU Eulerian (no particles) fluid simulation. Planning to implement in CUDA + OpenGL, starting with OpenGL for now.
+A GPU Eulerian (no particles) fluid simulation. Written for a daily challenge. Planning to implement in CUDA + OpenGL, starting with OpenGL for now.
 
-Written for a daily challenge. Still some bugs to work out.
+Color transport is obviously unphysical, but the underlying velocity grid is solved via semi-Lagrangian advection and corrected with an ~80-iteration Jacobi solver.
 
 Work-in-progress!
 
