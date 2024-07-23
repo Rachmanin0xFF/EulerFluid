@@ -31,8 +31,7 @@ void main() {
                 -texture2D(TEX0, texture_coord + vec2(0.0, -step_size.y)).w;
 
     // accelerate using pressure information
-    float rigidity = 0.0;
-
+    float rigidity = 0.0; // for testing
     float euler_update_vel_x = advected_vel.x - (1.0 + rigidity)*dt/(2*rho*step_size.x)*dpdx;
     float euler_update_vel_y = advected_vel.y - (1.0 + rigidity)*dt/(2*rho*step_size.y)*dpdy;
 

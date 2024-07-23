@@ -33,7 +33,7 @@ void main() {
     float dpdy = texture2D(TEX0, texture_coord + vec2(0.0, step_size.y)).w 
                 -texture2D(TEX0, texture_coord + vec2(0.0, -step_size.y)).w;
     
-    float gloopiness = 9.0; // should just be 1.0, lol
+    float gloopiness = 9.0; // should just be 0.0, lol
     velocity.x -= (1.0 + gloopiness)*dt/(2*rho*step_size.x)*dpdx;
     velocity.y -= (1.0 + gloopiness)*dt/(2*rho*step_size.y)*dpdy;
 

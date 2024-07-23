@@ -74,6 +74,8 @@ void glutil::gen_colorFBOTuple(const int& width, const int& height, colorFBOTupl
             // note for debugging: maybe format not allowed? check GL_FRAMEBUFFER_UNSUPPORTED
             exit(-1);
     }
+    glClearColor(0.5, 0.5, 0.5, 0.0);
+    glClear(GL_COLOR_BUFFER_BIT);
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 

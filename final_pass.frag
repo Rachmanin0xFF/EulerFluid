@@ -60,7 +60,11 @@ void main() {
     //light = light*1.6 - vec3(0.5);
 
     frag_color.xyz = 1.8*(normalize(B.xyz));
+    frag_color.xyz += 1.1*(1.0-dW.z)*normalize(texture2D(TEX1, texture_coord - dW.xy*0.05).xyz);
+
     frag_color.xyz *= pow(light, vec3(1.0/2.0));
 
+
+    
     //frag_color.xyz = vec3(spec);
 }
