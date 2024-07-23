@@ -16,3 +16,5 @@ TODO:
 * CUDA version
 * Vorticity confinement
 * Conjugate gradient solver
+
+Uses [SFML](https://www.sfml-dev.org/) and [GLFW](https://www.glfw.org/) for window creation and OpenGL, respectively. No other dependencies yet (.vcxproj is set up to build with CUDA, but it should still work without it right now).
