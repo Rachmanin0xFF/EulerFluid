@@ -6,7 +6,11 @@ Color transport is obviously unphysical, but the underlying velocity grid is sol
 
 Work-in-progress!
 
-https://github.com/user-attachments/assets/ca54ad1d-5e3a-4eb9-b494-1a4738ce5574
+
+
+https://github.com/user-attachments/assets/eecc7453-63a0-4bc8-a31f-ee786a4b8d20
+
+
 
 TODO:
 * CUDA version
